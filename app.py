@@ -42,8 +42,7 @@ class Leaderbord:
         ''' rename , replace df2 '''
         df2 = self.df2.rename(
             columns={'Team Name': 'team_name', 'User ID': 'uid'})  # renaming dataframe
-        df2.replace('Brandtech Lab', 'BrandTech Lab',
-                    inplace=True)  # replacing one flaw in data
+        df2.replace('Brandtech Lab', 'BrandTech Lab',inplace=True)  # replacing one flaw in data
         # merging two dataframe
         self.total_df = pd.merge(df1, df2, on="uid", how='inner')
         self.df2 = df2
@@ -74,7 +73,7 @@ class Leaderbord:
         # renaming columns
         output = output.rename(columns={'team_name': 'Thinking Teams Leaderboard',
                                         'total_statements': 'Average Statements', 'total_reasons': 'Average Reasons'})
-        return output
+        return output.drop(columns=['S No_x','S No_y'])
 
     def get_individual(self):
         '''
@@ -108,5 +107,3 @@ class Leaderbord:
 
 leaderbord = Leaderbord(df1, df2)
 leaderbord.get_in_excel()
-print(leaderbord.get_individual())
-print(leaderbord.get_teamwise())
